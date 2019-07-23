@@ -1,0 +1,47 @@
+import pygame
+from pygame.locals import *
+
+pygame.init()
+screen_info = pygame.display.Info()
+size = (width, height) =(int(screen_info.current_w),int(screen_info.current_h))
+screen = pygame.display.set_mode (size)
+clock = pygame.time.Clock()
+colour = (32,0,255)
+
+somethinfishy_image = pygame.image.load("thanos.png")
+somethinfishy_image = pygame.transform.smoothscale(somethinfishy_image,(300, 150))
+
+fishy_rect = somethinfishy_image.get_rect()
+
+fishy_rect.center = (width//2,height//2)
+
+speed = pygame.math.Vector2(10,-10)
+
+def movethanos():
+    global somethinfishy_image
+    size = (width, height) = (int(screen_info.current_w), int(screen_info.current_h))
+    fishy_rect.move_ip(speed)
+
+    if fishy_rect.left < 0:
+        speed[0] *= -1
+        somethinfishy_image = pygame.transform.flip(somethinfishy_image, True, False)
+    if fishy_rect.right > width:
+        speed[0] *= -1
+        somethinfishy_image = pygame.transform.flip(somethinfishy_image, True, False)
+    if fishy_rect.top < 0:
+        speed[1] *= -1
+        somethinfishy_image = pygame.transform.flip(somethinfishy_image,True,False)
+    if fishy_rect.bottom > height:
+        speed[1] *= -1
+        somethinfishy_image = pygame.transform.flip(somethinfishy_image, True, False)
+
+
+def main():
+    while True:
+        clock.tick(60)
+        movethanos()
+        screen.fill(colour)
+        screen.blit(somethinfishy_image,fishy_rect)
+        pygame.display.flip()
+if __name__ == "__main__":
+    main()
