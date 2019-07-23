@@ -1,0 +1,21 @@
+import pygame
+from pygame.locals import *
+
+pygame.init()
+screen_info = pygame.display.Info()
+size = (width, height) =(int(screen_info.current_w),int(screen_info.current_h))
+screen = pygame.display.set_mode (size)
+clock = pygame.time.Clock()
+colour = (32,0,255)
+
+somethinfishy_image = pygame.image.load("thanos.png")
+somethinfishy_image = pygame.transform.smoothscale(somethinfishy_image,(300, 150))
+
+fishy_rect = somethinfishy_image.get_rect()
+
+fishy_rect.center = (width//2,height//2)
+
+speed = pygame.math.Vector2(0,1)
+
+def movethanos():
+    fishy_rect.move_ip(speed)
